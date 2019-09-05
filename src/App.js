@@ -1,23 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+function GibaPics(props) {
+  console.log(props.pics)
+  return props.pics.map((a, index) => <img key={index} src={`${a.toUpperCase()}.png`} width={80} height={80} style={{ display: 'inline-block'}} />)
+}
+
 function App() {
+  const [gibaWords, setGiba] = useState(['6', '1', 'b', 'a'])
+  function parseNew(input) {
+    setGiba(input.target.value.replace(/[^a-fA-F0-9]/g, '').split(''))
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div style={{marginBottom: '20px'}}>
+          <input onChange={parseNew} value={gibaWords.join('')}/>
+        </div>
+        <div><GibaPics pics={gibaWords} /></div>
       </header>
     </div>
   );
